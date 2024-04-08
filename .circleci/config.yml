@@ -22,14 +22,29 @@ jobs:
             set +o pipefail
             docker load -i /caches/app.tar | true
       - run:
-          name: Run tests
-          command: echo "test"
+          name: Docker login
+          command: |
+            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
       - run:
           name: Build and push Udagram api user Docker image
           command: |
             docker build -t $DOCKERHUB_USERNAME/udagram-api-user ./udagram-api-user
-            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
             docker push $DOCKERHUB_USERNAME/udagram-api-user
+      - run:
+          name: Build and push Udagram api feed Docker image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/udagram-api-feed ./udagram-api-feed
+            docker push $DOCKERHUB_USERNAME/udagram-api-feed
+      - run:
+          name: Build and push Udagram Frontend Docker image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/udagram-frontend ./udagram-frontend
+            docker push $DOCKERHUB_USERNAME/udagram-frontend
+      - run:
+          name: Build and push Reverse Proxy Docker image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/reverseproxy ./udagram-reverseproxy
+            docker push $DOCKERHUB_USERNAME/reverseproxy
       - run:
           name: Notice done process
           command: |
