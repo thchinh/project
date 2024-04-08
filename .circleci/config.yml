@@ -1,27 +1,36 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:node:udagram-frontend
 version: 2.1
-orbs:
- docker: circleci/docker@1.5.0
 jobs:
-  build-test:
-    description: "Pull code from github to Circle CI"
-    executor: node/default # Install node dependencies and run tests
+  build:
+    docker:
+      - image: cimg/base:2022.09
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
       - run:
           name: Run tests
-          command: npm run test
-
-workflows:
-  build-and-test: # name of workflow
-    jobs:
-      - build-test
-      # - build-node:
-      #     requires:
-      #       - test-node
-    # - deploy:
-    #     requires:
-    #       - build-node
+          command: echo "test"
+# workflows:
+#   build-and-test: # name of workflow
+#     jobs:
+#       - build-test
+#       # - build-node:
+#       #     requires:
+#       #       - test-node
+#     # - deploy:
+#     #     requires:
+#     #       - build-node
