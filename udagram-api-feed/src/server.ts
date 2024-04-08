@@ -5,9 +5,7 @@ import {sequelize} from './sequelize';
 import {IndexRouter} from './controllers/v0/index.router';
 
 import bodyParser from 'body-parser';
-import {config} from './config/config';
 import {V0_FEED_MODELS} from './controllers/v0/model.index';
-
 
 (async () => {
   await sequelize.addModels(V0_FEED_MODELS);
@@ -16,7 +14,7 @@ import {V0_FEED_MODELS} from './controllers/v0/model.index';
   await sequelize.sync();
 
   const app = express();
-  const port = process.env.PORT || 8081;
+  const port = process.env.PORT || 8080;
 
   app.use(bodyParser.json());
 

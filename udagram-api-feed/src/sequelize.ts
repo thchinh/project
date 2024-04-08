@@ -18,3 +18,5 @@ export const sequelize = new Sequelize({
   },
 });
 
+console.log(config);
+

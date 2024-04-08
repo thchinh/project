@@ -4,7 +4,9 @@ FROM beevelop/ionic:latest AS ionic
 WORKDIR /usr/src/app
 ## Install app dependencies
 ## A wildcard is used to ensure both package.json AND package-lock.json are copied
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 COPY package*.json ./
+RUN npm config set legacy-peer-deps true
 RUN npm ci
 ## Bundle app source
 COPY . .
