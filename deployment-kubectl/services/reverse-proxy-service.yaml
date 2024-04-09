@@ -5,8 +5,9 @@ metadata:
   labels:
     run: reverse-proxy
 spec:
-  ports:
-    - port: 80
-      protocol: TCP
   selector:
     run: reverse-proxy
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
