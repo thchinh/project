@@ -15,7 +15,15 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: udagram-frontend
+      - name: frontend
         image: thchinh26102000/udagram-frontend
         ports:
-        - containerPort: 8080
+          - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"

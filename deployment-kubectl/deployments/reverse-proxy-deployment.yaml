@@ -15,7 +15,14 @@ spec:
         app: reverse-proxy
     spec:
       containers:
-      - name: reverseproxy
+      - name: reverse-proxy
         image: thchinh26102000/reverseproxy
         ports:
         - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"    
