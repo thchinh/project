@@ -16,6 +16,12 @@ export const s3 = new AWS.S3({
 export function getGetSignedUrl( key: string ): string {
   const signedUrlExpireSeconds = 60 * 5;
   
+  s3.config.update({
+    accessKeyId: config.access_key_id,
+    secretAccessKey: config.secret_access_key
+  });
+  console.log("s3: ", s3);
+
   return s3.getSignedUrl('getObject', {
     Bucket: config.aws_media_bucket,
     Key: key,
