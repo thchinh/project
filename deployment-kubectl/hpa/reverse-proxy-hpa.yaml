@@ -1,7 +1,7 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: reverseproxy-hpa
+  name: reverse-proxy-hpa
   namespace: default
 spec:
   scaleTargetRef:
