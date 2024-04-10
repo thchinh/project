@@ -19,6 +19,13 @@ spec:
           image: thchinh26102000/udagram-api-feed
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "2048Mi"
+              cpu: "500m"
           env:
             - name: POSTGRES_USERNAME
               valueFrom:
@@ -70,3 +77,4 @@ spec:
                 configMapKeyRef:
                   name: configmap-env
                   key: JWT_SECRET
+      restartPolicy: Always
