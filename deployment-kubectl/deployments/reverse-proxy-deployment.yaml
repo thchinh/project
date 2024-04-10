@@ -18,7 +18,7 @@ spec:
       - name: reverse-proxy
         image: thchinh26102000/reverseproxy
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources:
           requests:
             memory: "64Mi"
